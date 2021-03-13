@@ -34,6 +34,10 @@ export const Player = (props) => {
             .applyEuler(camera.rotation);
 
         api.velocity.set(direction.x, refVelocity.current[1], direction.z);
+
+        if ( jump && Math.abs(refVelocity.current[1].toFixed(2)) < 0.05) {
+            api.velocity.set(refVelocity.current[0], 8, refVelocity.current[2])
+        }
     });
 
     return (

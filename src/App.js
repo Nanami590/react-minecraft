@@ -3,13 +3,15 @@ import { Canvas } from "react-three-fiber";
 import { Sky } from "drei";
 import { Physics } from "use-cannon";
 
-import { useStore } from "./hooks";
+import { useStore, useInterval } from "./hooks";
 
 import { Ground, Player, Cube } from "./components";
 
 
 function App() {
-  const cubes = useStore((state) => state.cubes);
+  const [ cubes, saveWorld ] = useStore((state) => [state.cubes, state.saveWorld]);
+
+  useInterval(() => { saveWorld(cubes); console.log("World saved.") }, 10000);
 
   return (
     <Canvas shadowMap sRGB>
