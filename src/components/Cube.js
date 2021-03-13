@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useBox } from "use-cannon";
+
 import * as textures from "../textures"; 
+
+import { CUBE_TEXTURES } from "../enums";
 
 
 export const Cube = ({position, texture, ...props}) => {
@@ -18,14 +21,18 @@ export const Cube = ({position, texture, ...props}) => {
         setHover(Math.floor(event.faceIndex / 2));
     };
 
+    const removeHover = () => { setHover(null); };
+
     return (
-        <mesh castShadow ref={ref} onPointerMove={toggleCubeHover}>
+        <mesh castShadow ref={ref} onPointerMove={toggleCubeHover} onPointerOut={removeHover}>
             {[...Array(6)].map((_, index) => (
                 <meshStandardMaterial
                     key={index}
+                    transparent={true}
                     map={textures[texture]}
                     attachArray={"material"}
                     color={hover === index ? "gray" : "white"}
+                    opacity={texture === CUBE_TEXTURES.GLASS ? 0.7 : 1}
                 />
             ))}
             <boxBufferGeometry attach="geometry" />
