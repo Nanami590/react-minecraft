@@ -1,4 +1,4 @@
-export const CUBE_TYPES = {
+export const CUBE_TEXTURES = {
   GRASS: "grass",
   GLASS: "glass",
   WOOD: "wood",

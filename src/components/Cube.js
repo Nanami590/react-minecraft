@@ -3,7 +3,7 @@ import { useBox } from "use-cannon";
 import * as textures from "../textures"; 
 
 
-export const Cube = ({position, type, ...props}) => {
+export const Cube = ({position, texture, ...props}) => {
     const [hover, setHover] = useState(null);
 
     const [ref] = useBox(() => ({
@@ -23,7 +23,7 @@ export const Cube = ({position, type, ...props}) => {
             {[...Array(6)].map((_, index) => (
                 <meshStandardMaterial
                     key={index}
-                    map={textures[type]}
+                    map={textures[texture]}
                     attachArray={"material"}
                     color={hover === index ? "gray" : "white"}
                 />

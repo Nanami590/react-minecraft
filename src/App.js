@@ -3,12 +3,14 @@ import { Canvas } from "react-three-fiber";
 import { Sky } from "drei";
 import { Physics } from "use-cannon";
 
-import { CUBE_TYPES } from "./enums";
+import { useStore } from "./hooks";
 
 import { Ground, Player, Cube } from "./components";
 
 
 function App() {
+  const cubes = useStore((state) => state.cubes);
+
   return (
     <Canvas shadowMap sRGB>
       <Sky sunPosition={[100, 20, 100]} />
@@ -17,7 +19,11 @@ function App() {
       <Physics>
         <Ground position={[0, 0.5, 0]} />
         <Player position={[0, 6, 10]} />
-        <Cube position={[0, 1, 0]} type={CUBE_TYPES.WOOD}/>
+
+        {cubes.map(({pos, texture}, index) => (
+          <Cube key={index} position={pos} texture={texture}/>
+        ))}
+
       </Physics>
     </Canvas>
   );

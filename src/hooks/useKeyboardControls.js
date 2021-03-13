@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useStore } from "./useStore";
 
-import { CUBE_TYPES, ACTION_KEYS } from "../enums";
+import { CUBE_TEXTURES, ACTION_KEYS } from "../enums";
 
 
 const actionByKey = (key) => {
@@ -18,11 +18,11 @@ const actionByKey = (key) => {
 
 const textureByKey = (key) => {
   const keys = {
-    Digit1: CUBE_TYPES.DIRT,
-    Digit2: CUBE_TYPES.GRASS,
-    Digit3: CUBE_TYPES.GLASS,
-    Digit4: CUBE_TYPES.WOOD,
-    Digit5: CUBE_TYPES.LOG,
+    Digit1: CUBE_TEXTURES.DIRT,
+    Digit2: CUBE_TEXTURES.GRASS,
+    Digit3: CUBE_TEXTURES.GLASS,
+    Digit4: CUBE_TEXTURES.WOOD,
+    Digit5: CUBE_TEXTURES.LOG,
   };
 
   return keys[key];
