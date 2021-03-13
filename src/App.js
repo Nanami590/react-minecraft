@@ -13,7 +13,7 @@ function App() {
       <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
       <Physics>
         <Ground position={[0, 0.5, 0]} />
-        <Player position={[0, 3, 10]} />
+        <Player position={[0, 6, 10]} />
         <Cube position={[0, 1, 0]} type={"wood"}/>
       </Physics>
     </Canvas>
