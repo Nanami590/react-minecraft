@@ -17,9 +17,9 @@ const initialState = [
 
 export const useStore = create((set) => ({
     cubes: getLocalStorage("world") || initialState,
-    addCubes: (x ,y ,z, texture) => set(state => ({ cubes: [...state.cubes, {pos: [x, y, z], texture}] })),
-    removeCubes: (x, y, z) => set(state => state.cubes.filter(cube => cube.x !== x || cube.y !== y || cube.z !== z)),
-    textures: CUBE_TEXTURES.WOOD,
+    addCube: (x ,y ,z, texture) => set(state => ({ cubes: [...state.cubes, {pos: [x, y, z], texture}] })),
+    removeCube: (x, y, z) => set(state => ({cubes: state.cubes.filter(({pos}) => pos[0] !== x || pos[1] !== y || pos[2] !== z)})),
+    texture: CUBE_TEXTURES.WOOD,
     setTexture: (texture) => set(_ => ({ texture })),
     saveWorld: () => set((state => { setLocalStorage("world", state.cubes); }))
 }));

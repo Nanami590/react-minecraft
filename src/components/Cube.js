@@ -5,26 +5,54 @@ import * as textures from "../textures";
 
 import { CUBE_TEXTURES } from "../enums";
 
+import { useStore } from "../hooks";
+
 
 export const Cube = ({position, texture, ...props}) => {
-    const [hover, setHover] = useState(null);
+    const [ addCube, removeCube, activeTexture ] = useStore((state) => [state.addCube, state.removeCube, state.texture]);
+    const [ hover, setHover ] = useState(null);
 
-    const [ref] = useBox(() => ({
+    const [ ref ] = useBox(() => ({
         type: "Static",
         position,
         ...props
     }));
 
+    const getClickedFace = (event) => Math.floor(event.faceIndex / 2);
+
     const toggleCubeHover = (event) => {
         event.stopPropagation();
         
-        setHover(Math.floor(event.faceIndex / 2));
+        setHover(getClickedFace(event));
     };
 
     const removeHover = () => { setHover(null); };
 
+    const clickOnCube = (event) => {
+        event.stopPropagation();
+
+        const clickedFace = getClickedFace(event);
+        const { x, y, z } = ref.current.position;
+
+        switch (clickedFace) {
+            case 0: event.altKey ? removeCube(x, y, z) : addCube(x + 1, y, z, activeTexture); return;
+            case 1: event.altKey ? removeCube(x, y, z) : addCube(x - 1, y, z, activeTexture); return;
+            case 2: event.altKey ? removeCube(x, y, z) : addCube(x, y + 1, z, activeTexture); return;
+            case 3: event.altKey ? removeCube(x, y, z) : addCube(x, y - 1, z, activeTexture); return;
+            case 4: event.altKey ? removeCube(x, y, z) : addCube(x, y, z + 1, activeTexture); return;
+            case 5: event.altKey ? removeCube(x, y, z) : addCube(x, y, z - 1, activeTexture); return;
+            default: return;
+        }
+    };
+
     return (
-        <mesh castShadow ref={ref} onPointerMove={toggleCubeHover} onPointerOut={removeHover}>
+        <mesh
+            ref={ref}
+            castShadow
+            onClick={clickOnCube}
+            onPointerOut={removeHover}
+            onPointerMove={toggleCubeHover}
+        >
             {[...Array(6)].map((_, index) => (
                 <meshStandardMaterial
                     key={index}
