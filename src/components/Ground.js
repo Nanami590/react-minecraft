@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { usePlane } from "use-cannon";
 import { TextureLoader, RepeatWrapping } from "three";
 
@@ -11,10 +11,14 @@ export const Ground = (props) => {
   const [ addCube, activeTexture ] = useStore((state) => [ state.addCube, state.texture ]);
   const [ ref ] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }));
 
-  const texture = new TextureLoader().load(grass);
-  texture.wrapS = RepeatWrapping;
-  texture.wrapT = RepeatWrapping;
-  texture.repeat.set(100, 100);
+  const texture = useMemo(() => {
+    const returnedTexture = new TextureLoader().load(grass);
+    returnedTexture.wrapS = RepeatWrapping;
+    returnedTexture.wrapT = RepeatWrapping;
+    returnedTexture.repeat.set(50, 50);
+    
+    return returnedTexture;
+  }, []);
 
   const groundClick = (event) => {
     event.stopPropagation();
@@ -29,11 +33,8 @@ export const Ground = (props) => {
       receiveShadow
       onClick={groundClick}
     >
-      <planeBufferGeometry attach="geometry" args={[100, 100]} />
-      <meshStandardMaterial
-        map={texture}
-        attach="material"
-      />
+      <planeBufferGeometry attach={"geometry"} args={[50, 50]} />
+      <meshStandardMaterial map={texture} attach={"material"} />
     </mesh>
   );
 }

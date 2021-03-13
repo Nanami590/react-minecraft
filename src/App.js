@@ -13,7 +13,7 @@ import { Ground, Player, Cube } from "./components";
 function App() {
   const [ cubes, saveWorld ] = useStore((state) => [state.cubes, state.saveWorld]);
 
-  useInterval(() => { saveWorld(cubes); console.log("World saved.") }, 10000);
+  useInterval(() => { saveWorld(cubes); console.log("World saved.") }, 60000);
 
   return (
     <Canvas shadowMap sRGB>
@@ -22,7 +22,7 @@ function App() {
       <pointLight castShadow intensity={0.7} position={[100, 100, 100]} />
       <Physics>
         <Ground position={[0, 0.5, 0]} />
-        <Player position={[0, 6, 10]} />
+        <Player position={[0, 20, -20]} />
 
         {cubes.map(({pos, texture}) => (
           <Cube key={nanoid()} position={pos} texture={texture}/>
