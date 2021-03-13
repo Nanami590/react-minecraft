@@ -5,6 +5,8 @@ import { Vector3 } from "three";
 
 import { useKeyboardControls } from "../hooks";
 
+import { FPVControls } from "./FirstPersonViewControls";
+
 
 const SPEED = 6;
 
@@ -36,6 +38,7 @@ export const Player = (props) => {
 
     return (
         <>
+            <FPVControls />
             <mesh ref={ref} />
         </>
     );
