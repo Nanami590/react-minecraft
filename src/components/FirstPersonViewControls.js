@@ -5,7 +5,7 @@ import { PointerLockControls as PointerLockControlsImpl } from "three/examples/j
 
 extend({ PointerLockControlsImpl });
 
-export const FPVControls = (props) => {
+export const FPVControls = () => {
   const { camera, gl } = useThree();
   const controls = useRef();
   

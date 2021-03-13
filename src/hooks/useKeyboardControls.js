@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import { useStore } from "./useStore";
 
+import { CUBE_TYPES, ACTION_KEYS } from "../enums";
+
 
 const actionByKey = (key) => {
   const keys = {
-    KeyW: "moveForward",
-    KeyS: "moveBackward",
-    KeyA: "moveLeft",
-    KeyD: "moveRight",
-    Space: "jump",
+    KeyW: ACTION_KEYS.KEY_W,
+    KeyS: ACTION_KEYS.KEY_S,
+    KeyA: ACTION_KEYS.KEY_A,
+    KeyD: ACTION_KEYS.KEY_D,
+    Space: ACTION_KEYS.SPACE
   };
 
   return keys[key];
@@ -16,11 +18,11 @@ const actionByKey = (key) => {
 
 const textureByKey = (key) => {
   const keys = {
-    Digit1: "dirt",
-    Digit2: "grass",
-    Digit3: "glass",
-    Digit4: "wood",
-    Digit5: "log",
+    Digit1: CUBE_TYPES.DIRT,
+    Digit2: CUBE_TYPES.GRASS,
+    Digit3: CUBE_TYPES.GLASS,
+    Digit4: CUBE_TYPES.WOOD,
+    Digit5: CUBE_TYPES.LOG,
   };
 
   return keys[key];

@@ -7,8 +7,8 @@ import { useKeyboardControls } from "../hooks";
 
 import { FPVControls } from "./FirstPersonViewControls";
 
+import { SPEED } from "../enums";
 
-const SPEED = 6;
 
 export const Player = (props) => {
     const { camera } = useThree();

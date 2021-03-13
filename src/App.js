@@ -3,7 +3,10 @@ import { Canvas } from "react-three-fiber";
 import { Sky } from "drei";
 import { Physics } from "use-cannon";
 
+import { CUBE_TYPES } from "./enums";
+
 import { Ground, Player, Cube } from "./components";
+
 
 function App() {
   return (
@@ -14,7 +17,7 @@ function App() {
       <Physics>
         <Ground position={[0, 0.5, 0]} />
         <Player position={[0, 6, 10]} />
-        <Cube position={[0, 1, 0]} type={"wood"}/>
+        <Cube position={[0, 1, 0]} type={CUBE_TYPES.WOOD}/>
       </Physics>
     </Canvas>
   );
