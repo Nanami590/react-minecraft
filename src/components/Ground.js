@@ -10,6 +10,7 @@ import grass from "../images/grass.jpg";
 export const Ground = (props) => {
   const [ addCube, activeTexture ] = useStore((state) => [ state.addCube, state.texture ]);
   const [ ref ] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }));
+
   const texture = new TextureLoader().load(grass);
   texture.wrapS = RepeatWrapping;
   texture.wrapT = RepeatWrapping;
@@ -29,7 +30,10 @@ export const Ground = (props) => {
       onClick={groundClick}
     >
       <planeBufferGeometry attach="geometry" args={[100, 100]} />
-      <meshStandardMaterial map={texture} attach="material" />
+      <meshStandardMaterial
+        map={texture}
+        attach="material"
+      />
     </mesh>
   );
 }

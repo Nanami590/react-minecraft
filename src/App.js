@@ -2,6 +2,8 @@ import React from "react";
 import { Canvas } from "react-three-fiber";
 import { Sky } from "drei";
 import { Physics } from "use-cannon";
+import { nanoid } from "nanoid";
+
 
 import { useStore, useInterval } from "./hooks";
 
@@ -22,8 +24,8 @@ function App() {
         <Ground position={[0, 0.5, 0]} />
         <Player position={[0, 6, 10]} />
 
-        {cubes.map(({pos, texture}, index) => (
-          <Cube key={index} position={pos} texture={texture}/>
+        {cubes.map(({pos, texture}) => (
+          <Cube key={nanoid()} position={pos} texture={texture}/>
         ))}
 
       </Physics>
